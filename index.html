@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Checker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="storm-background">
+    <div class="storm-cloud cloud-one"></div>
+    <div class="storm-cloud cloud-two"></div>
+    <div class="storm-cloud cloud-three"></div>
+    <div class="storm-glow"></div>
+
+    <div class="storm-flash"></div>
+
+    <svg class="lightning bolt-one" viewBox="0 0 180 400">
+      <path d="M105 0 L70 105 L105 105 L35 245 L78 190 L55 325 L135 155 L95 155 Z"/>
+      <path class="branch" d="M72 105 L20 155 L53 150"/>
+    </svg>
+
+    <svg class="lightning bolt-two" viewBox="0 0 180 400">
+      <path d="M105 0 L70 105 L105 105 L35 245 L78 190 L55 325 L135 155 L95 155 Z"/>
+      <path class="branch" d="M72 105 L20 155 L53 150"/>
+    </svg>
+
+    <svg class="lightning bolt-three" viewBox="0 0 180 400">
+      <path d="M105 0 L70 105 L105 105 L35 245 L78 190 L55 325 L135 155 L95 155 Z"/>
+      <path class="branch" d="M72 105 L20 155 L53 150"/>
+    </svg>
+  </div>
+
+  <main class="container">
+    <header class="header">
+      <div class="storm-icon">⛈️</div>
+      <p class="eyebrow">OBJECT ORIENTED PROGRAMMING</p>
+      <h1>ATTENDANCE CHECKER</h1>
+      <p class="instructor">Instructor: Jomar Balmores</p>
+    </header>
+
+    <section class="dashboard">
+      <div class="date-box">
+        <label for="attendanceDate">Attendance Date</label>
+        <input type="date" id="attendanceDate">
+      </div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <span>Total Students</span>
+          <strong id="totalStudents">50</strong>
+        </div>
+        <div class="stat-card present-card">
+          <span>Present</span>
+          <strong id="presentCount">0</strong>
+        </div>
+        <div class="stat-card absent-card">
+          <span>Absent</span>
+          <strong id="absentCount">0</strong>
+        </div>
+        <div class="stat-card excuse-card">
+          <span>Excuse</span>
+          <strong id="excuseCount">0</strong>
+        </div>
+      </div>
+
+      <div class="progress-section">
+        <div class="progress-info">
+          <span>Attendance Progress</span>
+          <strong id="progressText">0%</strong>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="attendance-section">
+      <div class="section-heading">
+        <div>
+          <h2>Class List</h2>
+          <p>Manage your students' attendance.</p>
+        </div>
+        <span class="student-total">50 Students</span>
+      </div>
+
+      <div class="search-container">
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="Search student name..."
+          autocomplete="off"
+        >
+        <button
+          id="clearSearch"
+          class="clear-search"
+          type="button"
+          aria-label="Clear search"
+          hidden
+        >×</button>
+      </div>
+
+      <div class="legend">
+        <span><i class="dot gray"></i> Unmarked</span>
+        <span><i class="dot green"></i> Present</span>
+        <span><i class="dot red"></i> Absent</span>
+        <span><i class="dot yellow"></i> Excuse</span>
+      </div>
+
+      <div id="studentList" class="student-list"></div>
+
+      <div id="emptyMessage" class="empty-message" hidden>
+        No student found.
+      </div>
+    </section>
+
+    <section class="actions">
+      <button id="finishBtn" class="action-btn finish-btn">
+        ✓ Finish Attendance
+      </button>
+      <button id="pdfBtn" class="action-btn pdf-btn">
+        ↓ Export PDF
+      </button>
+      <button id="resetBtn" class="action-btn reset-btn">
+        ↻ Reset Attendance
+      </button>
+    </section>
+
+    <footer>
+      <p>ATTENDANCE CHECKER · OOP</p>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

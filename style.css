@@ -1,0 +1,750 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --background: #050b18;
+  --panel: rgba(12, 24, 43, 0.88);
+  --border: rgba(139, 190, 255, 0.16);
+  --blue: #57baff;
+  --text: #eaf4ff;
+  --muted: #91a8c3;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.storm-background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 50% 0%, #172c4a 0%, transparent 60%),
+    linear-gradient(180deg, #091426, #030711 85%);
+}
+
+.storm-cloud {
+  position: absolute;
+  width: 650px;
+  height: 230px;
+  border-radius: 50%;
+  background: #263b57;
+  filter: blur(75px);
+  opacity: 0.32;
+  animation: cloudMove 18s ease-in-out infinite alternate;
+}
+
+.cloud-one {
+  top: 5%;
+  left: -200px;
+}
+
+.cloud-two {
+  top: 30%;
+  right: -250px;
+  animation-delay: -7s;
+}
+
+.cloud-three {
+  bottom: 0;
+  left: 20%;
+  animation-delay: -12s;
+}
+
+.storm-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(76, 148, 255, 0.16),
+    transparent 60%
+  );
+  animation: glowPulse 5s ease-in-out infinite;
+}
+
+.storm-flash {
+  position: absolute;
+  inset: 0;
+  background: rgba(190, 220, 255, 0);
+  animation: skyFlash 9s infinite;
+}
+
+.lightning {
+  position: absolute;
+  width: 170px;
+  height: 380px;
+  fill: rgba(220, 240, 255, 0.95);
+  filter: drop-shadow(0 0 8px #a8d8ff)
+          drop-shadow(0 0 22px #5aaeff);
+  opacity: 0;
+  animation: lightningStrike 9s infinite;
+}
+
+.bolt-one {
+  top: 3%;
+  left: 10%;
+}
+
+.bolt-two {
+  top: 12%;
+  right: 12%;
+  transform: scale(0.75);
+  animation-delay: 3.1s;
+}
+
+.bolt-three {
+  top: 25%;
+  left: 65%;
+  transform: scale(0.55);
+  animation-delay: 6.2s;
+}
+
+.branch {
+  fill: none;
+  stroke: white;
+  stroke-width: 5;
+}
+
+@keyframes lightningStrike {
+  0%, 18%, 20%, 22%, 55%, 100% {
+    opacity: 0;
+  }
+  19%, 21% {
+    opacity: 0.95;
+  }
+  19.5% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes skyFlash {
+  0%, 18%, 20%, 22%, 55%, 100% {
+    background: rgba(180, 215, 255, 0);
+  }
+  19% {
+    background: rgba(180, 215, 255, 0.13);
+  }
+  19.5% {
+    background: rgba(180, 215, 255, 0.02);
+  }
+  21% {
+    background: rgba(180, 215, 255, 0.09);
+  }
+}
+
+@keyframes cloudMove {
+  from {
+    transform: translateX(-30px);
+  }
+  to {
+    transform: translateX(100px);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.container {
+  width: min(100% - 32px, 1050px);
+  margin: 0 auto;
+  padding: 38px 0;
+}
+
+.header {
+  text-align: center;
+  padding: 20px 10px 35px;
+}
+
+.storm-icon {
+  font-size: 42px;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 15px #69baff);
+}
+
+.eyebrow {
+  color: #77c5ff;
+  letter-spacing: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  font-size: clamp(27px, 5vw, 45px);
+  letter-spacing: 2px;
+  text-shadow: 0 0 25px rgba(87, 186, 255, 0.45);
+}
+
+.instructor {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.dashboard,
+.attendance-section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 22px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+}
+
+.date-box {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 22px;
+}
+
+.date-box label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.date-box input {
+  width: 100%;
+  max-width: 250px;
+  padding: 11px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #101e32;
+  color: white;
+  color-scheme: dark;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.stat-card span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.stat-card strong {
+  font-size: 28px;
+}
+
+.present-card strong {
+  color: #43e69b;
+}
+
+.absent-card strong {
+  color: #ff666f;
+}
+
+.excuse-card strong {
+  color: #ffd15c;
+}
+
+.progress-section {
+  margin-top: 25px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.progress-info span {
+  color: var(--muted);
+}
+
+.progress-info strong {
+  color: var(--blue);
+}
+
+.progress-track {
+  height: 9px;
+  background: #25344b;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #258bff, #54e5ff);
+  border-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.section-heading h2 {
+  font-size: 22px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.student-total {
+  background: rgba(87, 186, 255, 0.12);
+  color: #8ed1ff;
+  border: 1px solid rgba(87, 186, 255, 0.25);
+  border-radius: 20px;
+  padding: 7px 12px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.search-container {
+  position: relative;
+  margin-bottom: 17px;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 14px 45px 14px 15px;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid var(--border);
+  background: #0a1729;
+  color: white;
+  font-size: 14px;
+}
+
+.search-container input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(87, 186, 255, 0.1);
+}
+
+.search-container input::placeholder {
+  color: #7289a6;
+}
+
+.clear-search {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #a9bdd5;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.clear-search[hidden] {
+  display: none !important;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 17px;
+}
+
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.gray {
+  background: #929eaf;
+}
+
+.green {
+  background: #43e69b;
+}
+
+.red {
+  background: #ff666f;
+}
+
+.yellow {
+  background: #ffd15c;
+}
+
+.student-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.student-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 14px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(139, 190, 255, 0.09);
+  border-radius: 10px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.student-row:hover {
+  background: rgba(87, 186, 255, 0.07);
+}
+
+.student-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.student-number {
+  min-width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #1b3552;
+  color: #a9d9ff;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.student-name {
+  font-size: 13px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #929eaf;
+}
+
+.student-row.present {
+  border-color: rgba(67, 230, 155, 0.35);
+}
+
+.student-row.present .status-dot {
+  background: #43e69b;
+  box-shadow: 0 0 10px #43e69b;
+}
+
+.student-row.absent {
+  border-color: rgba(255, 102, 111, 0.35);
+}
+
+.student-row.absent .status-dot {
+  background: #ff666f;
+  box-shadow: 0 0 10px #ff666f;
+}
+
+.student-row.excuse {
+  border-color: rgba(255, 209, 92, 0.35);
+}
+
+.student-row.excuse .status-dot {
+  background: #ffd15c;
+  box-shadow: 0 0 10px #ffd15c;
+}
+
+.student-controls {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.status-btn {
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.status-btn:hover {
+  filter: brightness(1.2);
+  transform: translateY(-1px);
+}
+
+.status-btn.present-btn {
+  color: #5df0ad;
+  background: rgba(67, 230, 155, 0.1);
+  border-color: rgba(67, 230, 155, 0.2);
+}
+
+.status-btn.absent-btn {
+  color: #ff8188;
+  background: rgba(255, 102, 111, 0.1);
+  border-color: rgba(255, 102, 111, 0.2);
+}
+
+.status-btn.excuse-btn {
+  color: #ffda79;
+  background: rgba(255, 209, 92, 0.1);
+  border-color: rgba(255, 209, 92, 0.2);
+}
+
+.status-btn.selected {
+  color: #07111e;
+  filter: brightness(1.2);
+}
+
+.present-btn.selected {
+  background: #43e69b;
+}
+
+.absent-btn.selected {
+  background: #ff666f;
+}
+
+.excuse-btn.selected {
+  background: #ffd15c;
+}
+
+.empty-message {
+  text-align: center;
+  color: var(--muted);
+  padding: 30px 10px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.action-btn {
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.finish-btn {
+  background: #36d995;
+  color: #041b13;
+}
+
+.pdf-btn {
+  background: #258bff;
+  color: white;
+}
+
+.reset-btn {
+  background: #29394e;
+  color: #eaf4ff;
+  border: 1px solid var(--border);
+}
+
+footer {
+  text-align: center;
+  padding: 28px 0 5px;
+  color: #607994;
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background: #17334f;
+  color: white;
+  border: 1px solid rgba(87, 186, 255, 0.35);
+  padding: 12px 18px;
+  border-radius: 9px;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.25s;
+  z-index: 10;
+  width: max-content;
+  max-width: calc(100% - 30px);
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 700px) {
+  .container {
+    width: min(100% - 20px, 1050px);
+    padding-top: 22px;
+  }
+
+  .dashboard,
+  .attendance-section {
+    padding: 17px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .student-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .student-info {
+    width: 100%;
+  }
+
+  .student-controls {
+    width: 100%;
+  }
+
+  .status-btn {
+    flex: 1;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .legend {
+    gap: 10px;
+  }
+
+  .student-name {
+    font-size: 12px;
+  }
+
+  .lightning {
+    width: 100px;
+    height: 250px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .storm-background,
+  .search-container,
+  .legend,
+  .student-controls,
+  .actions,
+  footer,
+  .storm-icon {
+    display: none !important;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0;
+  }
+
+  .header {
+    padding: 10px;
+  }
+
+  .header h1,
+  .instructor,
+  .section-heading h2,
+  .section-heading p {
+    color: black !important;
+  }
+
+  .dashboard,
+  .attendance-section {
+    background: white !important;
+    color: black !important;
+    box-shadow: none;
+    border: 1px solid #bbb;
+    backdrop-filter: none;
+  }
+
+  .stat-card,
+  .student-row {
+    background: white !important;
+    color: black !important;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+
+  .stat-card span,
+  .progress-info span {
+    color: #333 !important;
+  }
+
+  .student-name {
+    color: black !important;
+  }
+
+  .student-row {
+    flex-direction: row;
+  }
+
+  .student-list {
+    gap: 5px;
+  }
+}
